@@ -75,5 +75,4 @@ configs:
 
 networks:
   elk:
-    name: service-network
-    external: true
+    driver: overlay
