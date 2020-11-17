@@ -13,6 +13,9 @@ services:
     environment:
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
       ELASTIC_PASSWORD: changeme
+      VIRTUAL_HOST: elastic-dev.m3y-it.com
+      LETSENCRYPT_HOST: elastic-dev.m3y-it.com
+      LETSENCRYPT_EMAIL: "contact@m3y-it.com"
       # Use single node discovery in order to disable production mode and avoid bootstrap checks.
       # see: https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
       discovery.type: single-node
@@ -37,6 +40,9 @@ services:
         target: /usr/share/logstash/pipeline/logstash.conf
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+      VIRTUAL_HOST: kibana-dev.m3y-it.com
+      LETSENCRYPT_HOST: kibana-dev.m3y-it.com
+      LETSENCRYPT_EMAIL: "contact@m3y-it.com"
     networks:
       - elk
     deploy:
@@ -69,4 +75,5 @@ configs:
 
 networks:
   elk:
-    driver: overlay
+    name: service-network
+    external: true
